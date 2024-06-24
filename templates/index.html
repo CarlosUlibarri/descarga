@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        // Función para cambiar el mensaje de estado
+        function changeMessage(message) {
+            document.getElementById('download-message').innerText = message;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Descargar Video de YouTube</h1>
+        {% if message %}
+        <p>{{ message }}</p>
+        {% endif %}
+        <form action="/download" method="POST" onsubmit="changeMessage('Descargando...')">
+            <label for="url">URL del Video:</label>
+            <input type="text" id="url" name="url" placeholder="Ingrese URL del video" required>
+            <label for="filename">Nombre del Archivo:</label>
+            <input type="text" id="filename" name="filename" placeholder="Nombre del archivo" required>
+            <label for="quality">Calidad:</label>
+            <select id="quality" name="quality">
+                <option value="high">Alta</option>
+                <option value="medium">Media</option>
+                <option value="low">Baja</option>
+            </select>
+            <button type="submit">Descargar</button>
+        </form>
+        <p id="download-message"></p> <!-- Aquí se mostrará el mensaje de estado -->
+    </div>
+</body>
+</html>
